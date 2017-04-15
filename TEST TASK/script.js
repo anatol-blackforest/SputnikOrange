@@ -1,4 +1,4 @@
-﻿var module = {};
+﻿const module = {};
 
 /* В задании как то так странно сформулировано, что "от пользователя мы получаем входные параметры, например название категории и название региона. Могут быть заданы другие параметры." Как то слишком размыто.
 Что значит "параметры"? Если параметры функции - то я не могу себе представить, как пользователь заходит на сайт, вбивает в консоли нечто вроде model.filtering({category:'bal', region:'shoulders'}), бъет enter и ждет реакции. Или я чего-то недопонимаю, или тут никакого юзер икспириенс. Так что будем считать что параметры - это просто данные запроса введенные пользователем через форму фильтров. Модуль обходит и фильтрует как строки, так вложенные массивы и объекты в дате, выводя результат в консоль. 
@@ -6,13 +6,13 @@
 
 module.filtering = function(){
 	
-	let category = document.getElementById('category');
-	let regions = document.getElementById('regions');
-	let ID = document.getElementById('id');
-	let name = document.getElementById('name');
-	let submit = document.getElementById('submit');
-	let filteredArray, parameters, itemValue;
+	const category = document.getElementById('category');
+	const regions = document.getElementById('regions');
+	const ID = document.getElementById('id');
+	const name = document.getElementById('name');
+	const submit = document.getElementById('submit');
 	
+	let filteredArray, parameters, itemValue;
 	let filtering = function(propertyElem, property){
 		
 		if(propertyElem.value.trim().length > 0){
