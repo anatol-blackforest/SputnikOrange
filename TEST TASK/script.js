@@ -17,7 +17,7 @@ module.filtering = function(){
 		
 		if(propertyElem.value.trim().length > 0){
 			
-			filteredArray = filteredArray.filter(function(item){
+			filteredArray = filteredArray.filter(item => {
 				
 				itemValue = false
 				
@@ -26,13 +26,13 @@ module.filtering = function(){
 						itemValue = true;
 					}
 				}else if(item[property] instanceof Array){
-					item[property].map(function(i){
+					item[property].map(i => {
 						if(i.toLowerCase().indexOf(parameters[property]) !== -1){
 							itemValue = true
 						}
 					});
 				}else if(typeof item[property] == 'object'){
-					var itemObjKey 
+					let itemObjKey 
 					for(itemObjKey in item[property]){
 						if(item[property][itemObjKey].toLowerCase().indexOf(parameters[property]) !== -1){
 							itemValue = true
