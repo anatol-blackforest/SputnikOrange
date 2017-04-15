@@ -13,33 +13,39 @@ module.filtering = function(){
 	let submit = document.getElementById('submit');
 	let filteredArray, parameters, itemValue;
 	
-	let filtering = function(property){
-		filteredArray = filteredArray.filter(function(item){
+	let filtering = function(propertyElem, property){
+		
+		if(propertyElem.value.trim().length > 0){
 			
-			itemValue = false
-			
-			if(typeof item[property] == 'string'){
-				if(item[property].toLowerCase().indexOf(parameters[property]) !== -1){
-					itemValue = true;
-				}
-			}else if(item[property] instanceof Array){
-				item[property].map(function(i){
-					if(i.toLowerCase().indexOf(parameters[property]) !== -1){
-						itemValue = true
+			filteredArray = filteredArray.filter(function(item){
+				
+				itemValue = false
+				
+				if(typeof item[property] == 'string'){
+					if(item[property].toLowerCase().indexOf(parameters[property]) !== -1){
+						itemValue = true;
 					}
-				});
-			}else if(typeof item[property] == 'object'){
-				var itemObjKey 
-				for(itemObjKey in item[property]){
-					if(item[property][itemObjKey].toLowerCase().indexOf(parameters[property]) !== -1){
-						itemValue = true
+				}else if(item[property] instanceof Array){
+					item[property].map(function(i){
+						if(i.toLowerCase().indexOf(parameters[property]) !== -1){
+							itemValue = true
+						}
+					});
+				}else if(typeof item[property] == 'object'){
+					var itemObjKey 
+					for(itemObjKey in item[property]){
+						if(item[property][itemObjKey].toLowerCase().indexOf(parameters[property]) !== -1){
+							itemValue = true
+						}
 					}
 				}
-			}
-			
-			return itemValue;
-			
-		});
+				
+				return itemValue;
+				
+			});
+		
+		}
+		
 	}
 	
 	submit.addEventListener("click",function(e){
@@ -57,25 +63,11 @@ module.filtering = function(){
 			
 			filteredArray = data.slice();
 			
-			if(category.value.trim().length > 0){
-				filtering("category")
-			};
-			
-			if(regions.value.trim().length > 0){
-				filtering('regions')
-			};
-			
-			if(ID.value.trim().length > 0){
-				filtering("ID")
-			};
-			
-			if(name.value.trim().length > 0){
-				filtering("name")
-			};
-			
-			if(video.value.trim().length > 0){
-				filtering("video")
-			};
+			filtering(category,"category");
+			filtering(regions,"regions");
+			filtering(ID,"ID");
+			filtering(name,"name");
+			filtering(video,"video");
 			
 		    console.log(`Найдено ${filteredArray.length} совпадений:`);
 			console.log(filteredArray);
