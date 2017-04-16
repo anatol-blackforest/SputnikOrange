@@ -7,13 +7,7 @@
 module.filtering = function(){
 	
 	const submit = document.getElementById('submit');
-	const elements = [
-		document.getElementById('category'),
-		document.getElementById('id'),
-		document.getElementById('name'),
-		document.getElementById('video'),
-		document.getElementById('regions'),
-	]
+	const elements = document.querySelectorAll("input[type=text]");
 	
 	let filteredArray, parameters, itemValue, filteringEnable;
 	let filtering = function(propertyElem, property){
@@ -57,7 +51,7 @@ module.filtering = function(){
 		filteringEnable = false;
 		parameters = {};
 		
-		elements.map(function(item){
+		Array.prototype.map.call(elements, function(item){
 			if(item.dataset.info){
 				parameters[item.dataset.info] = item.value.toLowerCase();
 				filtering(item, item.dataset.info);
