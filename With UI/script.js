@@ -9,7 +9,7 @@ module.filtering = function(){
 	const submit = document.getElementById('submit');
 	const elements = document.querySelectorAll("input[type=text]");
 	
-	let filteredArray, parameters, itemValue, filteringEnable;
+	let filteredArray, parameters, itemValue, filteringEnable, itemObjKey;
 	let filtering = function(propertyElem, property){
 		
 		if(propertyElem.value.trim().length > 0){
@@ -29,7 +29,6 @@ module.filtering = function(){
 						}
 					});
 				}else if(typeof item[property] == 'object'){
-					let itemObjKey 
 					for(itemObjKey in item[property]){
 						if(item[property][itemObjKey].toLowerCase().indexOf(parameters[property]) !== -1){
 							itemValue = true
