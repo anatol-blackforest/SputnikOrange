@@ -6,13 +6,16 @@
 
 module.filtering = function(){
 	
-	const category = document.getElementById('category');
-	const regions = document.getElementById('regions');
-	const ID = document.getElementById('id');
-	const name = document.getElementById('name');
 	const submit = document.getElementById('submit');
+	const elements = [
+		document.getElementById('category'),
+		document.getElementById('id'),
+		document.getElementById('name'),
+		document.getElementById('video'),
+		document.getElementById('regions'),
+	]
 	
-	let filteredArray, parameters, itemValue;
+	let filteredArray, parameters, itemValue, filteringEnable;
 	let filtering = function(propertyElem, property){
 		
 		if(propertyElem.value.trim().length > 0){
@@ -50,31 +53,26 @@ module.filtering = function(){
 	
 	submit.addEventListener("click",function(e){
 		e.preventDefault();
+		filteredArray = data.slice();
+		filteringEnable = false;
+		parameters = {};
 		
-		if(category.value || regions.value || ID.value || name.value || video.value){
-			
-			parameters = {
-				category:category.value.toLowerCase(), 
-				regions:regions.value.toLowerCase(), 
-				ID:ID.value.toLowerCase(), 
-				name:name.value.toLowerCase(), 
-				video:video.value.toLowerCase()
+		elements.map(function(item){
+			if(item.dataset.info){
+				parameters[item.dataset.info] = item.value.toLowerCase();
+				filtering(item, item.dataset.info);
 			}
-			
-			filteredArray = data.slice();
-			
-			filtering(category,"category");
-			filtering(regions,"regions");
-			filtering(ID,"ID");
-			filtering(name,"name");
-			filtering(video,"video");
-			
-		    console.log(`Найдено ${filteredArray.length} совпадений:`);
+			if(item.value.length > 0){
+				filteringEnable = true
+			}
+		})
+		
+		if(filteringEnable){
+			console.log(`Найдено ${filteredArray.length} совпадений:`);
 			console.log(filteredArray);
 			console.log('==========================================');
-			
 		}
-		
+			
 	})
 	
 }
