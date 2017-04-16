@@ -53,7 +53,7 @@ module.filtering = function(){
 		
 		Array.prototype.map.call(elements, function(item){
 			if(item.dataset.info){
-				parameters[item.dataset.info] = item.value.toLowerCase();
+				parameters[item.dataset.info] = item.value.trim().toLowerCase();
 				filtering(item, item.dataset.info);
 			}
 			if(item.value.length > 0){
