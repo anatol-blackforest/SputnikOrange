@@ -49,8 +49,7 @@ module.filtering = function(){
 		filteredArray = data.slice();
 		filteringEnable = false;
 		parameters = {};
-		
-		Array.prototype.map.call(elements, function(item){
+		[...elements].map(function(item){
 			if(item.dataset.info){
 				parameters[item.dataset.info] = item.value.trim().toLowerCase();
 				filtering(item, item.dataset.info);
